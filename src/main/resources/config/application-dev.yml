@@ -78,7 +78,7 @@ jhipster:
         version: V_1_1 # To use HTTP/2 you will need to activate TLS (see application-tls.yml)
     # CORS is only enabled by default with the "dev" profile, so BrowserSync can access the API
     cors:
-        allowed-origins: "*"
+        allowed-origins: "http://localhost:8081"
         allowed-methods: "*"
         allowed-headers: "*"
         exposed-headers: "Authorization,Link,X-Total-Count"

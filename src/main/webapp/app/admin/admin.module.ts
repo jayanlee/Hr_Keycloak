@@ -1,8 +1,11 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+
 import { JhiLanguageService } from 'ng-jhipster';
-import { JhiLanguageHelper } from 'app/core';
-import { GtnSharedModule } from 'app/shared';
+import { JhiLanguageHelper } from '../../app/core';
+import { GtnSharedModule } from '../../app/shared';
+import { initializer } from '../app-init';
 /* jhipster-needle-add-admin-module-import - JHipster will add admin modules imports here */
 
 import {
@@ -19,6 +22,7 @@ import {
 @NgModule({
     imports: [
         GtnSharedModule,
+        KeycloakAngularModule,
         RouterModule.forChild(adminState)
         /* jhipster-needle-add-admin-module - JHipster will add admin modules here */
     ],
@@ -31,7 +35,18 @@ import {
         JhiDocsComponent,
         JhiMetricsMonitoringComponent
     ],
-    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
+    providers: [
+        {
+            provide: JhiLanguageService,
+            useClass: JhiLanguageService
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initializer,
+            multi: true,
+            deps: [KeycloakService]
+        }
+    ],
     entryComponents: [JhiHealthModalComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

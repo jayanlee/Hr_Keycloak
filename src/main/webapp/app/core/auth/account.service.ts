@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
-import { SERVER_API_URL } from 'app/app.constants';
-import { Account } from 'app/core/user/account.model';
+import { SERVER_API_URL } from '../../../app/app.constants';
+import { Account } from '../../../app/core/user/account.model';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -14,7 +14,8 @@ export class AccountService {
     constructor(private http: HttpClient) {}
 
     fetch(): Observable<HttpResponse<Account>> {
-        return this.http.get<Account>(SERVER_API_URL + 'api/account', { observe: 'response' });
+        let dd = SERVER_API_URL + 'api/account';
+        return this.http.get<Account>(dd, { observe: 'response' });
     }
 
     save(account: any): Observable<HttpResponse<any>> {
@@ -60,7 +61,7 @@ export class AccountService {
         if (force) {
             this.userIdentity = undefined;
         }
-
+        console.log(location);
         // check and see if we have retrieved the userIdentity data from the server.
         // if we have, reuse it by immediately resolving
         if (this.userIdentity) {
@@ -83,6 +84,7 @@ export class AccountService {
                 return this.userIdentity;
             })
             .catch(err => {
+                console.log('cors error');
                 this.userIdentity = null;
                 this.authenticated = false;
                 this.authenticationState.next(this.userIdentity);

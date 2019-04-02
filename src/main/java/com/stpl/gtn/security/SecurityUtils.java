@@ -20,6 +20,7 @@ public final class SecurityUtils {
      * @return the login of the current user
      */
     public static Optional<String> getCurrentUserLogin() {
+    	System.out.println("inside function");
         SecurityContext securityContext = SecurityContextHolder.getContext();
         return Optional.ofNullable(securityContext.getAuthentication())
             .map(authentication -> {

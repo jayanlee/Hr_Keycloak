@@ -23,6 +23,7 @@
         "@ngx-translate/http-loader": "4.0.0",
         "bootstrap": "4.2.1",
         "core-js": "2.6.3",
+        "keycloak-angular": "^6.0.0",
         "moment": "2.24.0",
         "ng-jhipster": "0.9.1",
         "ngx-cookie": "2.0.1",
@@ -131,8 +132,8 @@
         "webpack:prod:main": "npm run webpack -- --config webpack/webpack.prod.js --profile",
         "webpack:prod": "npm run cleanup && npm run webpack:prod:main && npm run clean-www",
         "webpack:test": "npm run test",
-        "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-        "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
+        "webpack-dev-server": "node --max_old_space_size=5072 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+        "webpack": "node --max_old_space_size=5072 node_modules/webpack/bin/webpack.js"
     },
     "jestSonar": {
         "reportPath": "target/test-results/jest",

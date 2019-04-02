@@ -1,9 +1,11 @@
 package com.stpl.gtn;
 
-import com.stpl.gtn.config.ApplicationProperties;
-import com.stpl.gtn.config.DefaultProfileUtil;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.Collection;
 
-import io.github.jhipster.config.JHipsterConstants;
+import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -11,13 +13,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 
-import javax.annotation.PostConstruct;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.Collection;
+import com.stpl.gtn.config.ApplicationProperties;
+import com.stpl.gtn.config.DefaultProfileUtil;
+
+import io.github.jhipster.config.JHipsterConstants;
 
 @SpringBootApplication
 @EnableConfigurationProperties({ApplicationProperties.class})
@@ -26,7 +28,6 @@ public class GtnApp {
     private static final Logger log = LoggerFactory.getLogger(GtnApp.class);
 
     private final Environment env;
-
     public GtnApp(Environment env) {
         this.env = env;
     }
@@ -59,8 +60,12 @@ public class GtnApp {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(GtnApp.class);
         DefaultProfileUtil.addDefaultProfile(app);
-        Environment env = app.run(args).getEnvironment();
+        ApplicationContext applicationContext=app.run(args);
+        Environment env = applicationContext.getEnvironment();
         logApplicationStartup(env);
+//        for (String name :applicationContext.getBeanDefinitionNames()) {
+//			System.out.println("Bean---------------------"+name);
+//		}
     }
 
     private static void logApplicationStartup(Environment env) {

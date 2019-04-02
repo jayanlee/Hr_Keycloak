@@ -32,6 +32,7 @@ public class OAuth2SsoConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+    	System.out.println("oauth here?1");
         web.ignoring()
             .antMatchers(HttpMethod.OPTIONS, "/**")
             .antMatchers("/app/**/*.{js,html}")
@@ -43,6 +44,7 @@ public class OAuth2SsoConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	System.out.println("oauth here?2");
         http
             .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
@@ -66,6 +68,7 @@ public class OAuth2SsoConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public OAuth2RestTemplate oAuth2RestTemplate(OAuth2ProtectedResourceDetails oAuth2ProtectedResourceDetails,
         OAuth2ClientContext oAuth2ClientContext) {
+    	System.out.println("oauth here?3");
         return new OAuth2RestTemplate(oAuth2ProtectedResourceDetails, oAuth2ClientContext);
     }
 }

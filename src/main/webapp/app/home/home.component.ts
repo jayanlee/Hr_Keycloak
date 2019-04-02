@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoginService, AccountService, Account } from 'app/core';
+import { LoginService, AccountService, Account } from '../../app/core';
 
 @Component({
     selector: 'jhi-home',

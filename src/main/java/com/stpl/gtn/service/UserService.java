@@ -57,7 +57,7 @@ public class UserService {
             .ifPresent(user -> {
                 user.setFirstName(firstName);
                 user.setLastName(lastName);
-                user.setEmail(email.toLowerCase());
+                //user.setEmail(email.toLowerCase());
                 user.setLangKey(langKey);
                 user.setImageUrl(imageUrl);
                 userRepository.save(user);
@@ -152,6 +152,7 @@ public class UserService {
         UsernamePasswordAuthenticationToken token = getToken(details, user, grantedAuthorities);
         authentication = new OAuth2Authentication(authentication.getOAuth2Request(), token);
         authentication.setDetails(oauth2AuthenticationDetails); // must be present in a gateway for TokenRelayFilter to work
+        System.out.println("am i here?");
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         return new UserDTO(syncUserWithIdP(details, user));
